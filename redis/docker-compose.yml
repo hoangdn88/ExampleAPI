@@ -1,0 +1,11 @@
+version: '3.2'
+services:
+  redis:
+    image: "bitnami/redis:latest"
+
+    #container_name: custom-redis
+
+    command: redis-server --requirepass 123456a@
+
+    ports:
+      - "7484:6379"

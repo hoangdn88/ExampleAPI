@@ -1,0 +1,37 @@
+{
+  "Version": "1.0",
+  "Jwt": {
+    "Key": "0wlptUWR6SqFQ1kmtJJ4L1QJN9DvJ5zKy617BJliXeLwBHQFXjv2lohPH5D4KJQ",
+    "RsaPubKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyjDUFIqAg6RwoLZnrKBWVc1tC+DODLxuFKqLYLMTVpQrptRTjn4YI61GuCfXROAUSWq3DN0cwSBpYujtV53SgYUbQus8nhcqnBqo7o/ldGE5cV2nJ10CS7JzbqKRxDioayhbxK1SY4p9OlBNnNNoeOGHj0AhUz9nMMd/dJ+WKKsqspeAlBqBi8q71W9MFvnwdY5ypz0KWaNE0z7yKx058K6sxA5BMbqzOrwE2a4KCevq6QParvMmVM2griAsPq4LUdddUXm0DwySWs04E7AApLCeCh584JVug5YLtV00S1DGLJgj2Qycswl+JfGxYQhb77dCrTB2PRxh3wGgjplnzQIDAQAB",
+    "RsaPrivKey": "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDKMNQUioCDpHCgtmesoFZVzW0L4M4MvG4UqotgsxNWlCum1FOOfhgjrUa4J9dE4BRJarcM3RzBIGli6O1XndKBhRtC6zyeFyqcGqjuj+V0YTlxXacnXQJLsnNuopHEOKhrKFvErVJjin06UE2c02h44YePQCFTP2cwx390n5Yoqyqyl4CUGoGLyrvVb0wW+fB1jnKnPQpZo0TTPvIrHTnwrqzEDkExurM6vATZrgoJ6+rpA9qu8yZUzaCuICw+rgtR111RebQPDJJazTgTsACksJ4KHnzglW6Dlgu1XTRLUMYsmCPZDJyzCX4l8bFhCFvvt0KtMHY9HGHfAaCOmWfNAgMBAAECggEBAKSvSM7CURLoaWQ9rgwJPMj+XYeDP9FX2UGz93p34ZRvc26bGsPBKOBGTofIy6op6dwys44iuz0CrVQG7OqkfcVJKX9EI0eRDv+/J0HIqtg0KJmR8og5VZlabHL8r0Xn8CX35Wc41RaGwqEwr0bBWyK6b7PaREqOJfqxQ7s2ERRlg9qgQGEGBBA5ZpO5gIHcXppTjRsGG2KUV5BeXBvQ4FUEGind/d5Jm3i7NEH5nyQl6onvFwS90KK8HXiV9gxzwQWIDiGBJQ/XHlCdQ5pcju2K7oVS8C7nW0o0GhlUQ8qvdK6Ay9veGiCptCg6HXN9CqU06TAYJgPaIoISHIVUbPECgYEA6EAfsRwPBycBKc8SEX9G77sZ8ZQ4CmlOSXRyLJlUH9ym5jIfAJGUrdxVh+kiErbMKDIjZchnEIAL2JlG1fhvo4M4Z4TqTYTF7vPbIbUCX8keLxLAu6iIVnduuvvOhFWKqZ6W29v+6n2jFyvpLjquX5VHIf+o9UMt0mo2Rkj59CsCgYEA3t3MLtd9MOReMEMFaDGyp8NJyTDaa7AH+F/TmUPW5NXzj3xQeWgUGGz3fT2sZkqGYL8UUtAUZQRKE8tSiwksycnvYLgEtnjMlZdsdMDHyb8Joz1DSzu8jWI7SJp9CI2c1RGTWZ1btGbCXNa0wBZSUkiF45zkHDnean07Y6ymv+cCgYA5AlyFJgUOVWW0tI6T2vE3sW653Q8whw7fewT3q595vrj9MnpnslSTpM0d8n0ZqONOTphfyKR76WJ/BYjcxwHoWjKDPp4g7yGC+Trl+D+f8YdGOM00gzcMOn7kySC1XSYPYs1XJJZbSwG4k1/GqELbVZJDZzU7FwVtbALsl8c7RwKBgBQavgibt9dpQnXoFdzIXu1zWHylw45jWtS1EEmLLR+HjWksNbY+BVIOwmSx45N2tZiUpCi0TKKwOF6AwPl54mhxpv56mzI6w3nbJxWBLoSsjxoCtMdcpC285swt44mZ/MPbygcTgupLOs1VMQkC+nohwLI/vPQu5DmHAoyDTqeRAoGBAJSEdtq8nA54ze6qWkz1bU/pv2L2wcz4vVC+wwuyXBweQuxX8HR64XjNKlcHVnxsKM67t33AuFBPqQb06zqG+xAA/JIFVpnHCTurL/1xr7k3eX/Qpf7aQ2p8WeFbLaGb/s5gqXURGuHuJswGUskA3HckIlvYiH9HjIfl5s4TtGmB",
+    "AccessTokenExpiredAfterMinutes": 1440,
+    "RefreshTokenExpiredAfterMinutes": 14400
+  },
+  "Serilog": {
+    "MinimumLevel": "Information",
+    "TelegramApiKey": "5024063838:AAGoiCADcJdD9yQaBv-pNq1xFA23V7sgoZc"
+  },
+  "ServerAccess": {
+    "UserName": "fire-safe",
+    "Password": "abcd1234"
+  },
+  "AllowedHosts": "*",
+  "Kestrel": {
+    "EndPoints": {
+      "Http": {
+        "Url": "http://*:12000"
+      }
+    }
+  },
+  "MongoDB": {
+    "ConnectionString": "mongodb://dev-firesafe.bytech.vn:7117",
+    "DatabaseName": "FireManufacture"
+  },
+  "AWSUpFile": {
+    "AccessKeyId": "cdpWhlaXsaTFR2iF",
+    "SecretAccessKey": "nS4ZFYDiTpuUrZojJyv7I6Ou9L7SLDVz",
+    "BaseUrl": "https://dev-data.basato.vn",
+    "BucketName": "media",
+    "ServiceUrl": "http://dev-data.basato.vn:20000"
+  }
+}
