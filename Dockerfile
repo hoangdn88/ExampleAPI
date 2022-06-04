@@ -1,34 +1,34 @@
-FROM nginx:latest
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 
-#CMD echo "Xin chào Đỗ Ngọc Hoàng"
+ARG SERVICE
+ARG PORT
 
-# Update the repository
-#RUN sudo apt-get update
-# Install necessary tools
-#RUN apt-get install -y nano wget dialog net-tools vim git
+RUN echo "Build ARG: ${SERVICE} ${PORT}"
 
-#Thiết lập thư mục hiện tại
-WORKDIR /var/www/html
+WORKDIR /app
+EXPOSE ${PORT}
 
-# Remove file index docker
-RUN rm -rf /var/www/html/index.html
-#RUN rm /etc/nginx/conf.d/default.conf
+# copy csproj and restore as distinct layers
+COPY *.sln .
 
-# Copy tất cả các file trong thư mục hiện tại (.)  vào WORKDIR
-#ADD index.nginx-debian.html /var/www/html
-#COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY ExampleAPI/*.csproj ./ExampleAPI/
 
-#COPY index.html /usr/share/nginx/html/index.html
-COPY index.html /var/www/html/index.html
+RUN dotnet restore 
 
-VOLUME /var/www/html/
+COPY ExampleAPI/. ./ExampleAPI/
 
-#Thiết lập khi tạo container từ image sẽ mở cổng 80
-# ở mạng mà container nối vào
-EXPOSE 80 443
+WORKDIR /app/${SERVICE}
+RUN dotnet publish -c Release -o out
 
-# Khi chạy container tự động chạy ngay httpd
-#ENTRYPOINT ["/usr/sbin/httpd"]
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 
-#chạy terminate
-CMD [ "nginx", "-g", "daemon off;" ]
+ARG SERVICE
+ARG PORT
+
+WORKDIR /app
+COPY --from=build-env /app/${SERVICE}/out .
+
+ENV ASPNETCORE_URLS=http://+:${PORT}
+ENV SERVICE=$SERVICE
+
+ENTRYPOINT dotnet ${SERVICE}.dll
