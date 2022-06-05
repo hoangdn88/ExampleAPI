@@ -1,34 +1,23 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 
-ARG SERVICE
-ARG PORT
-
-RUN echo "Build ARG: ${SERVICE} ${PORT}"
-
-WORKDIR /app
-EXPOSE ${PORT}
-
+WORKDIR /app/ExampleAPI
+EXPOSE 8888
 # copy csproj and restore as distinct layers
 COPY *.sln .
-
 COPY ExampleAPI/*.csproj ./ExampleAPI/
+RUN dotnet restore
 
-RUN dotnet restore 
-
+# copy everything else and build app
 COPY ExampleAPI/. ./ExampleAPI/
+WORKDIR /app/ExampleAPI/ExampleAPI
+RUN dotnet publish -c release -o out
 
-WORKDIR /app/${SERVICE}
-RUN dotnet publish -c Release -o out
-
+# final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+WORKDIR /app/ExampleAPI/ExampleAPI
+COPY --from=build-env /app/ExampleAPI/ExampleAPI/out .
 
-ARG SERVICE
-ARG PORT
+ENV ASPNETCORE_URLS=http://+:8888
+#ENV SERVICE=ExampleAPI
 
-WORKDIR /app
-COPY --from=build-env /app/${SERVICE}/out .
-
-ENV ASPNETCORE_URLS=http://+:${PORT}
-ENV SERVICE=$SERVICE
-
-ENTRYPOINT dotnet ${SERVICE}.dll
+ENTRYPOINT ["dotnet", "ExampleAPI.dll"]
