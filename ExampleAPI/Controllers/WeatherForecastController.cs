@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace ExampleAPI.Controllers
 {
@@ -8,6 +11,7 @@ namespace ExampleAPI.Controllers
     public class WeatherForecastController : ControllerBase
     {
         private readonly ILogger<WeatherForecastController> _logger;
+        private string connectString = "mongodb://localhost:27077/";
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
@@ -17,7 +21,13 @@ namespace ExampleAPI.Controllers
         [HttpGet("hello")]
         public async Task<IActionResult> Hello(CancellationToken cancellationToken)
         {
-            return Ok("Xin chào API");
+            MongoClient client = new MongoClient(connectString);
+            var db = client.GetDatabase("FireManufacture");
+            var collection = db.GetCollection<DeviceTypeInfo>("DeviceTypeInfo");
+
+            var results = await collection.Find(x => x.DeleteFlag == false).ToListAsync();
+
+            return Ok(results);
         }
     }
 }
