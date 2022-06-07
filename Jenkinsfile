@@ -1,14 +1,26 @@
 pipeline {
     agent any
-    environment {
-		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-	}
+    //environment {
+		//DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	//}
     stages {
+		stage("Login") {
+
+				steps {
+					withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+						sh "echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin"
+					}
+					//sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+				}
+			}
+	
         stage("build") {
             steps {
                 script {
                     sh "docker build -f Dockerfile -t hoangdntb88/ampleapi:latest ."
                     
+					sh "docker push hoangdntb88/ampleapi:latest"
+					
                     //clean to save disk
 					sh "docker image rm hoangdntb88/ampleapi:latest"
 					
@@ -17,20 +29,6 @@ pipeline {
 
             }
         }
-		
-		stage("Login") {
-
-			steps {
-				sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
-			}
-		}
-		
-		stage("Push") {
-
-			steps {
-				sh "docker push hoangdntb88/ampleapi:latest"
-			}
-		}
         
         stage("deploy") {
             steps {
