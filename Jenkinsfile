@@ -35,7 +35,7 @@ pipeline {
         stage("deploy") {
             steps {
                 sshagent(credentials: ['ssh']) {
-                    sh "ssh -o StrictHostKeyChecking=no -l ubuntu 3.110.0.28 './example_server.sh'" 
+                    sh "ssh -o StrictHostKeyChecking=no -l ubuntu 3.110.0.28 '/home/ubuntu/example_server.sh'"
                 }
             }
         }
